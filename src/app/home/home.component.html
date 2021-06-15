@@ -1,0 +1,14 @@
+
+<div class="card-columns">
+<div *ngFor = "let product of appservice.products | Search:appservice.searchString" class="card">
+    <img src="{{product.img}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p>price :{{product.price}}</p>
+      <a [routerLink]= "['product' ,product.id]"  class="btn btn-primary">More Details</a>
+      <a *ngIf="appservice.username && !inCart(product)"  (click) ="addTocart(product)" class="btn btn-success">Add to Cart</a>
+      <a  *ngIf="appservice.username && inCart(product)"   (click) ="removeFromcart(product)"class="btn btn-danger">Remove from Cart</a>
+    </div>
+  </div>
+</div>

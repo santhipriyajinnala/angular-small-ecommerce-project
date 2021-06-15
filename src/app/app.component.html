@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink ="/">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink ="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf = "!appservice.username" class="nav-link" routerLink ="/login">Login</a>
+          <a  *ngIf = "appservice.username" class="nav-link" (click)="logout()">Logout</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            category
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li *ngFor ="let cat of appservice.categories"><a class="dropdown-item" [routerLink] ="['category',cat]">{{cat}}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a *ngIf = "!appservice.username" class="nav-link disabled" >welcome Guest</a>
+          <a  *ngIf = "appservice.username" class="nav-link disabled" >welcome {{appservice.username}}</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" name = 'search'placeholder="Search" [(ngModel)] ="appservice.searchString" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" routerLink ='cart'>{{appservice.addcartitems.length}}</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>
